@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>Schedule — {{ day }}</h2>
+  <p><a href="{{ url_for('index', day=day) }}">Refresh</a></p>
+  {% if booked or cancelled %}
+    <table>
+      <tr><th>Time</th><th>Type</th><th>Room</th><th>Client</th><th>Detail</th>
+          <th>Duration</th><th>Status</th><th>Action</th></tr>
+      {% for a in booked + cancelled %}
+        <tr>
+          <td>{{ a.start_time }}</td>
+          <td>{{ a.kind }}</td>
+          <td>{{ a.room or '—' }}</td>
+          <td>{{ a.client['name'] }}</td>
+          <td>
+            {% if a.kind == 'consultation' %}
+              {{ a.animal['name'] }} ({{ a.animal['species'] }}) — {{ a.reason }}
+            {% else %}
+              {{ a.property['name'] }}, {{ a.property['locality'] }} — {{ a.reason }}
+            {% endif %}
+          </td>
+          <td>{{ a.duration_hours ~ ' hr' if a.duration_hours else '—' }}</td>
+          <td class="{{ 'cancelled' if a.status == 'cancelled' else '' }}">{{ a.status }}</td>
+          <td>
+            {% if a.status == 'booked' %}
+              <form method="post" action="{{ url_for('appointment_change', appointment_id=a.id) }}"
+                    style="display:inline"><input type="submit" value="Change"></form>
+              <form method="post" action="{{ url_for('appointment_cancel', appointment_id=a.id) }}"
+                    style="display:inline"><input type="submit" value="Cancel"></form>
+            {% endif %}
+          </td>
+        </tr>
+      {% endfor %}
+    </table>
+  {% else %}
+    <p>No appointments booked for this day.</p>
+  {% endif %}
+{% endblock %}

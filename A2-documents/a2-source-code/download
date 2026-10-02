@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+
+# Environment / secrets — never commit real values
+.env
+.env.local
+
+# Database (local data must not be committed)
+data/*.db
+data/*.sqlite3
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Test / coverage artefacts
+.pytest_cache/
+.coverage
+htmlcov/
