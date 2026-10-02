@@ -27,7 +27,7 @@ class ClinicService:
     def __init__(self):
         self.appointments = []
 
-   def create_appointment(self, client, animal, start_time, service_type):
+def create_appointment(self, client, animal, start_time, service_type):
     # 自动生成id，简单用当前列表长度
     appointment_id = len(self.appointments) + 1
     appointment = InClinicAppointment(appointment_id, client, animal, start_time, service_type)
