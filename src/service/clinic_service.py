@@ -9,6 +9,11 @@ class Appointment:
         self.start_time = start_time
         self.service_type = service_type
         self.is_cancelled = False
+    
+    # 增加别名service，适配测试代码
+    @property
+    def service(self):
+        return self.service_type
 
     def cancel(self):
         self.is_cancelled = True
