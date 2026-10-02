@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>Home</h2>
+  <p>View a day's schedule below, or use the menu to manage records and book appointments.</p>
+  <form method="get" action="{{ url_for('index') }}">
+    <label>Day (YYYY-MM-DD):</label>
+    <input type="date" name="day" value="{{ request.args.get('day', '') }}">
+    <input type="submit" value="View schedule">
+  </form>
+{% endblock %}
