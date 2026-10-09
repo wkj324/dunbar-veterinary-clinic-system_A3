@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>Change appointment</h2>
+  <p>
+    {{ apt['client']['name'] }} — {{ apt['kind'] }}
+    on {{ apt['day'] }} at {{ apt['start_time'] }}
+    {% if apt['kind'] == 'consultation' %} (Room {{ apt['room'] }}, {{ apt['animal']['name'] }}){% endif %}
+  </p>
+  <form method="post">
+    <label>New date:</label><input type="date" name="day" value="{{ apt['day'] }}" required><br>
+    <label>New start time:</label><input type="time" name="start_time" value="{{ apt['start_time'] }}" required><br>
+    <input type="submit" value="Save change">
+  </form>
+{% endblock %}

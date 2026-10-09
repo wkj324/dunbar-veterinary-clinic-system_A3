@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>Animals</h2>
+  <form method="get" action="{{ url_for('animal_list') }}">
+    <label>Search by animal name:</label>
+    <input type="text" name="q" value="{{ q }}">
+    <input type="submit" value="Search">
+  </form>
+  <table>
+    <tr><th>Name</th><th>Species</th><th>Breed</th><th>Owner</th></tr>
+    {% for a in rows %}
+      <tr><td>{{ a.name }}</td><td>{{ a.species }}</td><td>{{ a.breed or '—' }}</td>
+          <td>{{ a.owner_name }}</td></tr>
+    {% else %}
+      <tr><td colspan="4">No animals found.</td></tr>
+    {% endfor %}
+  </table>
+{% endblock %}

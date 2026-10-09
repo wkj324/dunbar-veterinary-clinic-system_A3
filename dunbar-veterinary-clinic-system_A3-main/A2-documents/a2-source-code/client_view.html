@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>{{ client['name'] }} {% if not client['active'] %}(inactive){% endif %}</h2>
+  <p>Phone: {{ client['phone'] }} · Email: {{ client['email'] or '—' }} · Type: {{ client['client_type'] }}</p>
+
+  {% if client['active'] %}
+  <form method="post" action="{{ url_for('client_inactivate', client_id=client.id) }}">
+    <input type="submit" value="Mark inactive">
+  </form>
+  {% endif %}
+
+  <h3>Animals</h3>
+  <p><a href="{{ url_for('animal_new', client_id=client.id) }}">Add animal</a></p>
+  <table>
+    <tr><th>Name</th><th>Species</th><th>Breed</th></tr>
+    {% for a in animals %}
+      <tr><td>{{ a.name }}</td><td>{{ a.species }}</td><td>{{ a.breed or '—' }}</td></tr>
+    {% else %}
+      <tr><td colspan="3">No animals.</td></tr>
+    {% endfor %}
+  </table>
+
+  <h3>Properties</h3>
+  <p><a href="{{ url_for('property_new', client_id=client.id) }}">Add property</a></p>
+  <table>
+    <tr><th>Name</th><th>Locality</th><th>Access notes</th><th></th></tr>
+    {% for p in props %}
+      <tr><td>{{ p.name }}</td><td>{{ p.locality }}</td><td>{{ p.access_notes or '—' }}</td>
+          <td>
+            <form method="post" action="{{ url_for('property_remove', property_id=p.id) }}">
+              <input type="submit" value="Remove">
+            </form>
+          </td></tr>
+    {% else %}
+      <tr><td colspan="4">No properties.</td></tr>
+    {% endfor %}
+  </table>
+
+  <h3>Appointments</h3>
+  <p><a href="{{ url_for('appointment_book', client_id=client.id) }}">Book for this client</a></p>
+  <table>
+    <tr><th>Day</th><th>Time</th><th>Type</th><th>Detail</th><th>Status</th></tr>
+    {% for a in appointments %}
+      <tr><td>{{ a.day }}</td><td>{{ a.start_time }}</td><td>{{ a.kind }}</td>
+          <td>
+            {% if a.kind == 'consultation' %}{{ a.animal['name'] }} ({{ a.animal['species'] }}) — {{ a.reason }}
+            {% else %}{{ a.property['name'] }}, {{ a.property['locality'] }} — {{ a.reason }}
+            {% endif %}
+          </td>
+          <td class="{{ 'cancelled' if a.status == 'cancelled' else '' }}">{{ a.status }}</td></tr>
+    {% else %}
+      <tr><td colspan="5">No appointments.</td></tr>
+    {% endfor %}
+  </table>
+{% endblock %}
