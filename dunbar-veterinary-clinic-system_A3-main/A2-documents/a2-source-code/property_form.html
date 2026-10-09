@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>Add property</h2>
+  <form method="post">
+    <label>Name *</label><input type="text" name="name" required><br>
+    <label>Locality *</label><input type="text" name="locality" required><br>
+    <label>Access notes</label><textarea name="access_notes" rows="3" cols="40"></textarea><br>
+    <input type="submit" value="Save property">
+  </form>
+{% endblock %}
