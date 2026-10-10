@@ -12,3 +12,11 @@ class AppointmentService:
             if apt.appointment_id == appointment_id:
                 return apt
         return None
+        
+        # US4 新增：取消预约
+    def cancel_appointment(self, appointment_id):
+        for index, apt in enumerate(self.appointment_list):
+            if apt.appointment_id == appointment_id:
+                del self.appointment_list[index]
+                return True
+        return False
