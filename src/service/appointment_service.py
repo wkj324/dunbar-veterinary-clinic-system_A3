@@ -4,11 +4,12 @@ class AppointmentService:
     def __init__(self):
         self.appointment_list = []
 
-    def add_appointment(self, appointment):
-        self.appointment_list.append(appointment)
+    def add_appointment(self, appt: Appointment):
+        self.appointment_list.append(appt)
 
     def get_appointment_by_id(self, appointment_id):
         for apt in self.appointment_list:
-            if apt.appointment_id == appointment_id:
+            if apt.id == appointment_id:
                 return apt
         return None
+

@@ -1,7 +1,9 @@
 class Animal:
-    def __init__(self, animal_id, name, species, owner_id):
-        self.animal_id = animal_id
+    _id_counter = 1
+    def __init__(self, name, species, owner_id):
+        self.id = Animal._id_counter
+        Animal._id_counter += 1
         self.name = name
         self.species = species
         self.owner_id = owner_id
-
+        
