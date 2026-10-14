@@ -14,3 +14,11 @@ class AppointmentFilterService:
             if appt.service_type == appt_type:
                 filtered.append(appt)
         return filtered
+        
+    def filter_by_date(self, target_date: str):
+        """US5: Filter appointments by appointment date"""
+        filtered = []
+        for appt in self.appointments:
+            if appt.date == target_date:
+                filtered.append(appt)
+        return filtered

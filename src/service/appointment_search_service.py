@@ -16,3 +16,11 @@ class AppointmentSearchService:
                 if pet.id == appt.pet_id and pet.name == pet_name:
                     result.append(appt)
         return result
+
+    def search_by_animal_id(self, animal_id):
+        """US6: Search appointments by animal id"""
+        filtered = []
+        for appt in self.appointments:
+            if appt.pet_id == animal_id:
+                filtered.append(appt)
+        return filtered
