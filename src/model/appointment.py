@@ -1,7 +1,9 @@
 class Appointment:
-    def __init__(self, appointment_id, animal_id, date, description):
-        self.appointment_id = appointment_id
-        self.animal_id = animal_id
+    _id_counter = 1
+    def __init__(self, date, service_type, client_id, pet_id):
+        self.id = Appointment._id_counter
+        Appointment._id_counter += 1
         self.date = date
-        self.description = description
-
+        self.service_type = service_type
+        self.client_id = client_id
+        self.pet_id = pet_id

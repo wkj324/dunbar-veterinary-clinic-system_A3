@@ -1,10 +1,8 @@
 class Client:
-    def __init__(self, name, contact_number, email=None, client_type="normal"):
+    _id_counter = 1
+    def __init__(self, name, phone, email):
+        self.id = Client._id_counter
+        Client._id_counter += 1
         self.name = name
-        self.contact_number = contact_number
+        self.phone = phone
         self.email = email
-        self.client_type = client_type
-        self.is_active = True
-
-    def deactivate(self):
-        self.is_active = False
