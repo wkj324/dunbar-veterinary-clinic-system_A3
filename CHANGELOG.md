@@ -17,7 +17,7 @@ All notable changes to the Dunbar Veterinary Clinic Appointment Management Syste
 
 ### Known Limitations (recorded in Confluence Change Log)
 
-- Data is currently held in memory and is lost on restart. Migration to SQLite is planned for the next release (tracked as CR-01).
+- Data is currently held in memory and is lost on restart. Migration to SQLite is planned for the next release (tracked as CR-02).
 - Farm-visit and property features are implemented in simplified form; full scheduling detail remains in the Jira Product Backlog (see Confluence Handover page).
 
 ## [v1.0.0] - 2026-10-09
